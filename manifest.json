@@ -1,0 +1,80 @@
+{
+  "name": "cortex-plugin-home-assistant",
+  "version": "1.0.0",
+  "description": "Cortex agent as smart home brain: control lights, thermostats, locks, cameras",
+  "kind": "esm",
+  "entryPoint": "mod.ts",
+  "runtime": "deno",
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": "https://github.com/CortexPrism/cortex-plugin-home-assistant",
+  "capabilities": [
+    "tools",
+    "network:fetch"
+  ],
+  "tools": [
+    {
+      "name": "ha_get_state",
+      "description": "Get entity state from Home Assistant",
+      "params": [
+        { "name": "entity_id", "type": "string", "description": "Entity ID (e.g. light.living_room)", "required": true }
+      ]
+    },
+    {
+      "name": "ha_set_state",
+      "description": "Set entity state (turn on/off, set value)",
+      "params": [
+        { "name": "entity_id", "type": "string", "description": "Entity ID", "required": true },
+        { "name": "state", "type": "string", "description": "Target state (on, off, home, away, or numeric)", "required": true },
+        { "name": "attributes", "type": "string", "description": "JSON attributes (brightness, color, etc.)", "required": false }
+      ]
+    },
+    {
+      "name": "ha_list_entities",
+      "description": "List entities by domain and area",
+      "params": [
+        { "name": "domain", "type": "string", "description": "Filter by domain", "options": ["light", "switch", "climate", "lock", "camera", "sensor"], "required": false },
+        { "name": "area", "type": "string", "description": "Filter by area name", "required": false }
+      ]
+    },
+    {
+      "name": "ha_call_service",
+      "description": "Call a Home Assistant service",
+      "params": [
+        { "name": "domain", "type": "string", "description": "Service domain", "options": ["light", "switch", "climate", "lock", "script", "scene"], "required": true },
+        { "name": "service", "type": "string", "description": "Service name", "options": ["turn_on", "turn_off", "toggle", "set_temperature", "lock", "unlock"], "required": true },
+        { "name": "entity_id", "type": "string", "description": "Entity ID", "required": false },
+        { "name": "data", "type": "string", "description": "JSON service data payload", "required": false }
+      ]
+    },
+    {
+      "name": "ha_get_automations",
+      "description": "List all automations",
+      "params": []
+    },
+    {
+      "name": "ha_create_automation",
+      "description": "Create automation from description",
+      "params": [
+        { "name": "description", "type": "string", "description": "Natural language description (e.g. 'Turn on porch light at sunset')", "required": true },
+        { "name": "trigger", "type": "string", "description": "JSON trigger configuration", "required": false },
+        { "name": "action", "type": "string", "description": "JSON action configuration", "required": false }
+      ]
+    }
+  ],
+  "ui": {
+    "section": "Home Assistant",
+    "fields": [
+      { "key": "haUrl", "label": "Home Assistant URL", "type": "text", "description": "URL of Home Assistant instance", "required": true, "default": "http://homeassistant.local:8123" },
+      { "key": "haToken", "label": "Long-Lived Access Token", "type": "secret", "description": "Home Assistant long-lived access token", "required": true }
+    ]
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "cortex": ">=1.0.0"
+  },
+  "aiDisclosure": {
+    "tools": ["Claude Code (Anthropic)"],
+    "humanReview": true
+  }
+}

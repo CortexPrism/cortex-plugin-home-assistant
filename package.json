@@ -1,0 +1,32 @@
+{
+  "name": "cortex-plugin-home-assistant",
+  "version": "1.0.0",
+  "description": "Cortex agent as smart home brain: control lights, thermostats, locks, cameras",
+  "type": "module",
+  "main": "mod.ts",
+  "scripts": {
+    "dev": "node --watch mod.ts",
+    "test": "node --test test/**/*.test.js",
+    "fmt": "prettier --write .",
+    "fmt:check": "prettier --check .",
+    "lint": "eslint ."
+  },
+  "keywords": ["cortex", "plugin", "cortex-plugin", "esm", "home-assistant", "iot", "smart-home"],
+  "author": "CortexPrism",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CortexPrism/cortex-plugin-home-assistant.git"
+  },
+  "dependencies": {
+    "@cortexprism/plugin-sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
