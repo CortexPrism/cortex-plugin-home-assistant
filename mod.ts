@@ -333,6 +333,7 @@ const ha_create_automation: Tool = {
 };
 
 export async function onLoad(ctx: PluginContext): Promise<void> {
+  ctx.logger.info(`[cortex-plugin-home-assistant] Loaded`);
   config = await ctx.config.get();
 }
 

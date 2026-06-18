@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-home-assistant",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Cortex agent as smart home brain: control lights, thermostats, locks, cameras",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -29,7 +29,12 @@
       "name": "ha_set_state",
       "description": "Set entity state (turn on/off, set value)",
       "params": [
-        { "name": "entity_id", "type": "string", "description": "Entity ID", "required": true },
+        {
+          "name": "entity_id",
+          "type": "string",
+          "description": "Entity ID",
+          "required": true
+        },
         {
           "name": "state",
           "type": "string",
@@ -52,8 +57,15 @@
           "name": "domain",
           "type": "string",
           "description": "Filter by domain",
-          "options": ["light", "switch", "climate", "lock", "camera", "sensor"],
-          "required": false
+          "required": false,
+          "enum": [
+            "light",
+            "switch",
+            "climate",
+            "lock",
+            "camera",
+            "sensor"
+          ]
         },
         {
           "name": "area",
@@ -71,17 +83,36 @@
           "name": "domain",
           "type": "string",
           "description": "Service domain",
-          "options": ["light", "switch", "climate", "lock", "script", "scene"],
-          "required": true
+          "required": true,
+          "enum": [
+            "light",
+            "switch",
+            "climate",
+            "lock",
+            "script",
+            "scene"
+          ]
         },
         {
           "name": "service",
           "type": "string",
           "description": "Service name",
-          "options": ["turn_on", "turn_off", "toggle", "set_temperature", "lock", "unlock"],
-          "required": true
+          "required": true,
+          "enum": [
+            "turn_on",
+            "turn_off",
+            "toggle",
+            "set_temperature",
+            "lock",
+            "unlock"
+          ]
         },
-        { "name": "entity_id", "type": "string", "description": "Entity ID", "required": false },
+        {
+          "name": "entity_id",
+          "type": "string",
+          "description": "Entity ID",
+          "required": false
+        },
         {
           "name": "data",
           "type": "string",
@@ -121,22 +152,26 @@
     }
   ],
   "ui": {
-    "section": "Home Assistant",
-    "fields": [
+    "settings": [
       {
-        "key": "haUrl",
-        "label": "Home Assistant URL",
-        "type": "text",
-        "description": "URL of Home Assistant instance",
-        "required": true,
-        "default": "http://homeassistant.local:8123"
-      },
-      {
-        "key": "haToken",
-        "label": "Long-Lived Access Token",
-        "type": "secret",
-        "description": "Home Assistant long-lived access token",
-        "required": true
+        "section": "Home Assistant",
+        "fields": [
+          {
+            "key": "haUrl",
+            "label": "Home Assistant URL",
+            "type": "text",
+            "description": "URL of Home Assistant instance",
+            "required": true,
+            "default": "http://homeassistant.local:8123"
+          },
+          {
+            "key": "haToken",
+            "label": "Long-Lived Access Token",
+            "type": "secret",
+            "description": "Home Assistant long-lived access token",
+            "required": true
+          }
+        ]
       }
     ]
   },
@@ -145,7 +180,10 @@
     "cortex": ">=1.0.0"
   },
   "aiDisclosure": {
-    "tools": ["Claude Code (Anthropic)"],
+    "tools": [
+      "Claude Code (Anthropic)"
+    ],
     "humanReview": true
-  }
+  },
+  "homepage": "https://github.com/CortexPrism/cortex-plugin-home-assistant"
 }
